@@ -17,7 +17,7 @@ namespace :linked_files do
     task :files do
       on roles :web do
         fetch(:linked_files, []).each do |file|
-          upload! file, "#{shared_path}/#{file}"
+          upload! File.join("upload", file), "#{shared_path}/#{file}"
         end
       end
     end
@@ -25,7 +25,7 @@ namespace :linked_files do
     task :dirs do
       on roles :web do
         fetch(:linked_dirs, []).each do |dir|
-          upload! dir, "#{shared_path}/", recursive: true
+          upload! File.join("upload", dir), "#{shared_path}/", recursive: true
         end
       end
     end
