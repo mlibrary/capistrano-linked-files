@@ -6,7 +6,7 @@ namespace :linked_files do
       on roles :web do
         stage = fetch(:stage)
         fetch(:config_files,[]).each do |file|
-          upload! File.join("upload", "#{stage}, #{file}"), "#{shared_path}/#{file}"
+          upload! File.join("upload", stage.to_s, file), "#{shared_path}/#{file}"
         end
       end
     end
