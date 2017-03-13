@@ -11,6 +11,7 @@ namespace :linked_files do
         end
       end
     end
+  end
 
   task :concat_linked_config_files do
     on roles :all do
