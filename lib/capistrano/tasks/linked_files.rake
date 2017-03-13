@@ -16,11 +16,11 @@ namespace :linked_files do
   task :concat_linked_config_files do
     on roles :all do
       set :old_linked_files, fetch(:linked_files,[])
-      set :linked_files, fetch(:config_files,[]).concat(fetch(:linked_files,[])).uniq
+      set :linked_files, (fetch(:config_files,[]) + (fetch(:linked_files,[]))).uniq
     end
   end
 
-  desc "Upload stage-seprated config files, and link them."
+  desc "Upload stage-separated config files, and link them."
   task :upload do
     invoke "linked_files:upload:files"
   end
