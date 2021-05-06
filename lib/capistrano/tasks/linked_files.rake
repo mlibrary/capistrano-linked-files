@@ -15,8 +15,12 @@ namespace :linked_files do
 
   task :concat_linked_config_files do
     on roles :all do
-      set :old_linked_files, fetch(:linked_files,[])
-      set :linked_files, (fetch(:config_files,[]) + (fetch(:linked_files,[]))).uniq
+      Capistrano::LinkedFiles.synchronize do
+        unless fetch(:old_linked_files, false)
+          set :old_linked_files, fetch(:linked_files,[])
+          set :linked_files, (fetch(:config_files,[]) + (fetch(:linked_files,[]))).uniq
+        end
+      end
     end
   end
 
